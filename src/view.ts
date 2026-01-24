@@ -90,7 +90,7 @@ export default class View {
 
       const buttonEl = document.createElement("button");
       buttonEl.textContent = "Delete";
-      buttonEl.dataset.id = String(t.id);
+      buttonEl.dataset.id = t.id;
 
       transactionEl.append(descriptionEl, amountEl, dateEl, buttonEl);
       listEl.appendChild(transactionEl);
@@ -127,7 +127,7 @@ export default class View {
     formEl.reset();
   }
 
-  bindTransactionDelete(handler: (transactionId: number) => void) {
+  bindTransactionDelete(handler: (transactionId: string) => void) {
     [this.getIncomeListEl(), this.getExpenseListEl()].forEach((container) => {
       container.addEventListener("click", (e) => {
         const target = e.target;
@@ -138,8 +138,7 @@ export default class View {
               "Transaction Delete button does not have a data-id attribute",
             );
           } else {
-            const transactionId = parseInt(btn.dataset.id);
-            handler(transactionId);
+            handler(btn.dataset.id);
           }
         }
       });
