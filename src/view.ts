@@ -71,9 +71,9 @@ const renderIncomeList = (incomeList: Income[]) => {
   incomeListEl.innerHTML = incomeListHTML;
 };
 
-const renderIncomeTotal = (amount: number) => {
+const renderIncomeTotal = (amount_cents: number) => {
   const incomeTotalEl = getIncomeTotalEl();
-  incomeTotalEl.innerHTML = amount.toString();
+  incomeTotalEl.innerHTML = currency.format(amount_cents / 100);
 };
 
 const renderExpenseList = (expenseList: Expense[]) => {
@@ -87,9 +87,9 @@ const renderExpenseList = (expenseList: Expense[]) => {
   expenseListEl.innerHTML = expenseListHTML;
 };
 
-const renderExpenseTotal = (amount: number) => {
+const renderExpenseTotal = (amount_cents: number) => {
   const expenseTotalEl = getExpenseTotalEl();
-  expenseTotalEl.innerHTML = amount.toString();
+  expenseTotalEl.innerHTML = currency.format(amount_cents / 100);
 };
 
 const bindFormSubmit = (handler: (e: SubmitEvent) => void) => {
