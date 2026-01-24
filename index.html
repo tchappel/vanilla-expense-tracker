@@ -20,7 +20,8 @@
         <div class="transaction-form__field">
           <label class="transaction-form__label" for="type">Type</label>
           <select class="transaction-form__select" name="type" id="type" required>
-            <option value="expense" selected>Expense</option>
+            <option value="" selected></option>
+            <option value="expense">Expense</option>
             <option value="income">Income</option>
           </select>
         </div>
@@ -44,7 +45,7 @@
         <div class="transaction-section transaction-section--expense">
           <h2 class="transaction-section__title">Expenses</h2>
           <div class="transaction-section__content">
-            <div class="transaction-list" id="expense-list"><!-- Expense List --></div>
+            <div class="transaction-list" id="expense-list"></div>
             <div class="transaction-section__total">
               <span class="transaction-section__total-label">Total:</span>
               <span class="transaction-section__total-amount" id="expense-total"></span>
@@ -57,7 +58,7 @@
         <div class="transaction-section transaction-section--income">
           <h2 class="transaction-section__title">Income</h2>
           <div class="transaction-section__content">
-            <div class="transaction-list" id="income-list"><!-- Income List --></div>
+            <div class="transaction-list" id="income-list"></div>
             <div class="transaction-section__total">
               <span class="transaction-section__total-label">Total:</span>
               <span class="transaction-section__total-amount" id="income-total"></span>

@@ -2,7 +2,7 @@ type TransactionBase = {
   id: number;
   amount_cents: number;
   description: string;
-  date: Date;
+  date: string;
 };
 
 export type Expense = TransactionBase & {
@@ -15,5 +15,4 @@ export type Income = TransactionBase & {
 
 export type Transaction = Expense | Income;
 
-// For creating new transactions (without id)
 export type NewTransaction = Omit<Transaction, "id">;

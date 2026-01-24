@@ -1,45 +1,55 @@
-import type { Income, NewTransaction, Transaction } from "./types";
+import type { Expense, Income, NewTransaction, Transaction } from "./types";
 
-let transactions: Transaction[] = [];
-let transactionCounter = 0;
+type ModelListener = () => void;
 
-export const getBalance = (): number => {
-  return transactions.reduce((acc, t) => {
-    return t.type === "income" ? acc + t.amount_cents : acc - t.amount_cents;
-  }, 0);
-};
+export default class Model {
+  private transactions: Transaction[] = [];
+  private transactionCounter = 0;
+  private listeners: ModelListener[] = [];
 
-export const addTransaction = (transaction: NewTransaction) => {
-  transactions.push({
-    ...transaction,
-    id: transactionCounter++,
-  });
-};
+  getBalance = (): number => {
+    return this.transactions.reduce((acc, t) => {
+      return t.type === "income" ? acc + t.amount_cents : acc - t.amount_cents;
+    }, 0);
+  };
 
-export const deleteTransaction = (id: Transaction["id"]) => {
-  transactions = transactions.filter((t) => t.id !== id);
-};
+  addTransaction = (transaction: NewTransaction) => {
+    this.transactions.push({
+      ...transaction,
+      id: this.transactionCounter++,
+    });
+    this.notify();
+  };
 
-export const getIncomeList = (): Income[] =>
-  transactions.filter((t) => t.type === "income");
+  deleteTransaction = (id: Transaction["id"]) => {
+    this.transactions = this.transactions.filter((t) => t.id !== id);
+    this.notify();
+  };
 
-export const getIncomeTotal = (): number => {
-  return getIncomeList().reduce((acc, t) => acc + t.amount_cents, 0);
-};
+  getIncomeList = (): Income[] => {
+    return this.transactions.filter((t) => t.type === "income") as Income[];
+  };
 
-export const getExpenseList = () => {
-  return transactions.filter((t) => t.type === "expense");
-};
+  getIncomeTotal = (): number => {
+    return this.getIncomeList().reduce((acc, t) => acc + t.amount_cents, 0);
+  };
 
-export const getExpenseTotal = (): number => {
-  return getExpenseList().reduce((acc, t) => acc + t.amount_cents, 0);
-};
+  getExpenseList = (): Expense[] => {
+    return this.transactions.filter((t) => t.type === "expense") as Expense[];
+  };
 
-export default {
-  getBalance,
-  getIncomeList,
-  getIncomeTotal,
-  getExpenseList,
-  getExpenseTotal,
-  addTransaction,
-};
+  getExpenseTotal = (): number => {
+    return this.getExpenseList().reduce((acc, t) => acc + t.amount_cents, 0);
+  };
+
+  subscribe = (listener: ModelListener) => {
+    this.listeners.push(listener);
+    return () => {
+      this.listeners = this.listeners.filter((l) => l !== listener);
+    };
+  };
+
+  notify = () => {
+    this.listeners.forEach((l) => l());
+  };
+}

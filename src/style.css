@@ -4,6 +4,8 @@
   --color-primary: #4a90e2;
   --color-expense: #e74c3c;
   --color-income: #2ecc71;
+  --color-expense-light: #fdecea;
+  --color-income-light: #e6f9f0;
   --color-text: #2c3e50;
   --color-text-light: #7f8c8d;
   --color-border: #dfe6e9;
@@ -146,6 +148,14 @@ body {
   height: 100%;
 }
 
+.transaction-section--expense {
+  background-color: var(--color-expense-light);
+}
+
+.transaction-section--income {
+  background-color: var(--color-income-light);
+}
+
 .transaction-section__title {
   font-size: 1.25rem;
   font-weight: 700;
@@ -175,6 +185,16 @@ body {
   flex: 1;
   margin-bottom: var(--spacing-md);
   min-height: 200px;
+}
+
+.transaction {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+}
+
+.transaction__description {
+  margin-right: auto;
 }
 
 /* Transaction Total */
