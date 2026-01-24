@@ -1,5 +1,5 @@
 type TransactionBase = {
-  id: number;
+  id: string;
   amount_cents: number;
   description: string;
   date: string;

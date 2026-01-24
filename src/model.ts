@@ -1,11 +1,30 @@
+import storage from "./lib/storage";
 import type { Expense, Income, NewTransaction, Transaction } from "./types";
 
 type ModelListener = () => void;
 
 export default class Model {
   private transactions: Transaction[] = [];
-  private transactionCounter = 0;
   private listeners: ModelListener[] = [];
+
+  constructor() {
+    this.loadTransactions();
+  }
+
+  private generateId = () => {
+    return `${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+  };
+
+  private loadTransactions = () => {
+    const data = storage.get("transactions");
+    if (data) {
+      this.transactions = data;
+    }
+  };
+
+  private saveTransactions = () => {
+    storage.set("transactions", this.transactions);
+  };
 
   getBalance = (): number => {
     return this.transactions.reduce((acc, t) => {
@@ -16,13 +35,15 @@ export default class Model {
   addTransaction = (transaction: NewTransaction) => {
     this.transactions.push({
       ...transaction,
-      id: this.transactionCounter++,
+      id: this.generateId(),
     });
+    this.saveTransactions();
     this.notify();
   };
 
   deleteTransaction = (id: Transaction["id"]) => {
     this.transactions = this.transactions.filter((t) => t.id !== id);
+    this.saveTransactions();
     this.notify();
   };
 

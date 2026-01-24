@@ -13,12 +13,12 @@ const available = isLocalStorageAvailable();
 
 if (!available) {
   alert("Data persistence disabled: localStorage unavailable");
-  console.error(
+  console.warn(
     "localStorage is not available, storage operations will be no-ops",
   );
 }
 
-export const storage = available
+const storage = available
   ? {
       get(key: string) {
         const item = localStorage.getItem(key);
@@ -53,3 +53,5 @@ export const storage = available
         return false;
       },
     };
+
+export default storage;
