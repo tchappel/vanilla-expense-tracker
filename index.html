@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vanilla-expense-tracker</title>
+</head>
+
+<body>
+  <main>
+    <div>Balance: <span id="balance"></span></div>
+    <div>
+      <form action="" id="form">
+        <label for="type">Type</label>
+        <select name="type" id="type">
+          <option value="expense">Expense</option>
+          <option value="income">Income</option>>
+        </select>
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description" />
+        <label for="amount">Amount</label>
+        <input type="number" name="amount" id="amount" />
+        <input type="submit">Add</input>
+      </form>
+    </div>
+    <div>
+      <div>
+        <h2>Expense</h2>
+        <div>
+          <div id="expense-list"><!-- Expense List --></div>
+          <div>Expense Total <span id="expense-total"></span></div>
+        </div>
+      </div>
+      <div>
+        <h2>Income</h2>
+        <div>
+          <div id="income-list"><!-- Income List --></div>
+          <div>Income Total <span id="income-total"></span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
