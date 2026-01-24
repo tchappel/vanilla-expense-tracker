@@ -5,39 +5,64 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>vanilla-expense-tracker</title>
+  <title>Expense Tracker</title>
 </head>
 
 <body>
-  <main>
-    <div>Balance: <span id="balance"></span></div>
-    <div>
-      <form action="" id="form">
-        <label for="type">Type</label>
-        <select name="type" id="type">
-          <option value="expense">Expense</option>
-          <option value="income">Income</option>>
-        </select>
-        <label for="description">Description</label>
-        <input type="text" name="description" id="description" />
-        <label for="amount">Amount</label>
-        <input type="number" name="amount" id="amount" />
-        <input type="submit">Add</input>
+  <main class="app">
+    <div class="balance">
+      <span class="balance__label">Balance:</span>
+      <span class="balance__amount" id="balance"></span>
+    </div>
+
+    <div class="form-section">
+      <form class="transaction-form" id="form">
+        <div class="transaction-form__field">
+          <label class="transaction-form__label" for="type">Type</label>
+          <select class="transaction-form__select" name="type" id="type" required>
+            <option value="expense" selected>Expense</option>
+            <option value="income">Income</option>
+          </select>
+        </div>
+
+        <div class="transaction-form__field">
+          <label class="transaction-form__label" for="description">Description</label>
+          <input class="transaction-form__input" type="text" name="description" id="description" required />
+        </div>
+
+        <div class="transaction-form__field">
+          <label class="transaction-form__label" for="amount">Amount ($)</label>
+          <input class="transaction-form__input" type="number" name="amount" id="amount" step="0.01" required />
+        </div>
+
+        <button class="transaction-form__submit" type="submit">Add</button>
       </form>
     </div>
-    <div>
-      <div>
-        <h2>Expense</h2>
-        <div>
-          <div id="expense-list"><!-- Expense List --></div>
-          <div>Expense Total <span id="expense-total"></span></div>
+
+    <div class="transactions">
+      <div class="transactions__column">
+        <div class="transaction-section transaction-section--expense">
+          <h2 class="transaction-section__title">Expenses</h2>
+          <div class="transaction-section__content">
+            <div class="transaction-list" id="expense-list"><!-- Expense List --></div>
+            <div class="transaction-section__total">
+              <span class="transaction-section__total-label">Total:</span>
+              <span class="transaction-section__total-amount" id="expense-total"></span>
+            </div>
+          </div>
         </div>
       </div>
-      <div>
-        <h2>Income</h2>
-        <div>
-          <div id="income-list"><!-- Income List --></div>
-          <div>Income Total <span id="income-total"></span></div>
+
+      <div class="transactions__column">
+        <div class="transaction-section transaction-section--income">
+          <h2 class="transaction-section__title">Income</h2>
+          <div class="transaction-section__content">
+            <div class="transaction-list" id="income-list"><!-- Income List --></div>
+            <div class="transaction-section__total">
+              <span class="transaction-section__total-label">Total:</span>
+              <span class="transaction-section__total-amount" id="income-total"></span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
