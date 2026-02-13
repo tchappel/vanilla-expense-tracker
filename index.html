@@ -1,74 +1,100 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Expense Tracker</title>
-</head>
+  <body>
+    <main class="app">
+      <div class="balance">
+        <span class="balance__label">Balance:</span>
+        <span class="balance__amount" id="balance"></span>
+      </div>
 
-<body>
-  <main class="app">
-    <div class="balance">
-      <span class="balance__label">Balance:</span>
-      <span class="balance__amount" id="balance"></span>
-    </div>
+      <div class="form-section">
+        <form class="transaction-form" id="form">
+          <div class="transaction-form__field">
+            <label class="transaction-form__label" for="type">Type</label>
+            <select
+              class="transaction-form__select"
+              name="type"
+              id="type"
+              required
+            >
+              <option value="" selected></option>
+              <option value="expense">Expense</option>
+              <option value="income">Income</option>
+            </select>
+          </div>
 
-    <div class="form-section">
-      <form class="transaction-form" id="form">
-        <div class="transaction-form__field">
-          <label class="transaction-form__label" for="type">Type</label>
-          <select class="transaction-form__select" name="type" id="type" required>
-            <option value="" selected></option>
-            <option value="expense">Expense</option>
-            <option value="income">Income</option>
-          </select>
+          <div class="transaction-form__field">
+            <label class="transaction-form__label" for="description"
+              >Description</label
+            >
+            <input
+              class="transaction-form__input"
+              type="text"
+              name="description"
+              id="description"
+              required
+            />
+          </div>
+
+          <div class="transaction-form__field">
+            <label class="transaction-form__label" for="amount"
+              >Amount ($)</label
+            >
+            <input
+              class="transaction-form__input"
+              type="number"
+              name="amount"
+              id="amount"
+              step="0.01"
+              required
+            />
+          </div>
+
+          <button class="transaction-form__submit" type="submit">Add</button>
+        </form>
+      </div>
+
+      <div class="transactions">
+        <div class="transactions__column">
+          <div class="transaction-section transaction-section--expense">
+            <h2 class="transaction-section__title">Expenses</h2>
+            <div class="transaction-section__content">
+              <div class="transaction-list" id="expense-list"></div>
+              <div class="transaction-section__total">
+                <span class="transaction-section__total-label">Total:</span>
+                <span
+                  class="transaction-section__total-amount"
+                  id="expense-total"
+                ></span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="transaction-form__field">
-          <label class="transaction-form__label" for="description">Description</label>
-          <input class="transaction-form__input" type="text" name="description" id="description" required />
-        </div>
-
-        <div class="transaction-form__field">
-          <label class="transaction-form__label" for="amount">Amount ($)</label>
-          <input class="transaction-form__input" type="number" name="amount" id="amount" step="0.01" required />
-        </div>
-
-        <button class="transaction-form__submit" type="submit">Add</button>
-      </form>
-    </div>
-
-    <div class="transactions">
-      <div class="transactions__column">
-        <div class="transaction-section transaction-section--expense">
-          <h2 class="transaction-section__title">Expenses</h2>
-          <div class="transaction-section__content">
-            <div class="transaction-list" id="expense-list"></div>
-            <div class="transaction-section__total">
-              <span class="transaction-section__total-label">Total:</span>
-              <span class="transaction-section__total-amount" id="expense-total"></span>
+        <div class="transactions__column">
+          <div class="transaction-section transaction-section--income">
+            <h2 class="transaction-section__title">Income</h2>
+            <div class="transaction-section__content">
+              <div class="transaction-list" id="income-list"></div>
+              <div class="transaction-section__total">
+                <span class="transaction-section__total-label">Total:</span>
+                <span
+                  class="transaction-section__total-amount"
+                  id="income-total"
+                ></span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="transactions__column">
-        <div class="transaction-section transaction-section--income">
-          <h2 class="transaction-section__title">Income</h2>
-          <div class="transaction-section__content">
-            <div class="transaction-list" id="income-list"></div>
-            <div class="transaction-section__total">
-              <span class="transaction-section__total-label">Total:</span>
-              <span class="transaction-section__total-amount" id="income-total"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-  <script type="module" src="/src/main.ts"></script>
-</body>
-
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

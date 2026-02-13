@@ -1,5 +1,3 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from "vite";
 
-export default defineConfig({
-  base: '/vanilla-expense-tracker/',
-})
+export default defineConfig({});
